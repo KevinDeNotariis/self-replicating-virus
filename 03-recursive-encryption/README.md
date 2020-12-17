@@ -268,5 +268,66 @@ This script is going to follow these steps:
 1. Ask the level of encryption.
 2. Ask the encrypted filename to encrypt.
 3. Take the file, use the `encrypt_decryption.py` module to encrypt it and generate a file with the same name as the input but with `_e1` at the end.
-4. Take this newly generated file, and apply to this the `encrypted_decryption.py` module and generate a new file but this with `_e2` at the end of the filename.
+4. Take this newly generated file, and apply to this the `encrypt_decryption.py` module and generate a new file with `_e2` at the end of the filename.
 5. Repeat this process for a number of time equals to the level of encryption specified by the user.
+
+<hr>
+
+```py
+import encrypt_decryption
+
+number_of_encryption = 1
+original_filename = ""
+```
+
+Import the module and define the global variables used in the program. The string `original_filename` will be used to generate the names for each output files.
+
+<hr>
+
+```py
+def level_of_encryption():
+  global number_of_encryption
+  print("Number of encryption: ")
+  number_of_encryption = input()
+
+
+def ask_for_filename():
+  global original_filename
+  encrypt_decryption.ask_for_filename()
+  original_filename = encrypt_decryption.file_name[:-3]
+```
+
+Ask for the level of encryption and the filename containing the encrypted virus. Since we are using the function `ask_for_filename()` of the module `encrypt_decryption.py`, the variable `file_name` of that module will be set (equal to the user input). Using this variable, the global `original_filename` will also be set.
+
+<hr>
+
+```py
+def encrypt_loop():
+  encrypted_filename = original_filename + "_e1"
+
+  for i in range(1, int(number_of_encryption)+1):
+    print(i)
+    encrypt_decryption.compute_payloads()
+    encrypt_decryption.write_virus(encrypted_filename + ".py")
+
+    encrypt_decryption.file_name = encrypted_filename + ".py"
+    encrypted_filename = original_filename + "_e" + str(i+1)
+
+    encrypt_decryption.payload.clear()
+    encrypt_decryption.encode.clear()
+    encrypt_decryption.previous_payload.clear()
+```
+
+This defines the loop for generating all the new encrypted viruses. These are the steps it takes:
+
+- Set the variable `encrypted_filename` with the `original filename + "_e1"`, this variable will store the name of the output of each iteration.
+
+- Start the loop and run the function of the `encrypt_decryption.py` module, namely the `compute_payloads()` and the `write_virus(filename)`. The `compute_payloads()` will run using as input the `file_name` set in the function analyzed before (`ask_for_filename()`). The `write_virus` will generate a file, named after the string stored in `encrypted_filename`.
+
+- Update the `file_name` in the module `encrypt_decryption.py` with the newly generated output file. This file, in fact, will be used as input for the next iteration.
+
+- Update the `encrypted_filename` which will store the name for the next output file.
+
+- Clear the content of the variable used in the module.
+
+- Continue the loop for a number of time equal to the specified value.

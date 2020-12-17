@@ -16,8 +16,7 @@ def ask_for_filename():
 
 
 def encrypt_loop():
-  to_encrypt_filename = original_filename
-  encrypted_filename = to_encrypt_filename + "_e1"
+  encrypted_filename = original_filename + "_e1"
 
   for i in range(1, int(number_of_encryption)+1):
     print(i)
