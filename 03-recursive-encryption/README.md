@@ -10,7 +10,10 @@ The information and code provided here, are inteded to be used for educational a
 2. [A deeper dive](#a-deeper-dive)
 
    2.1 [encrypt_decryption.py](#encrypt_decryption.py)
-   2.2 [recursively_encrypt_decryption.py])(#recursively_encrypt_decryption.py)
+
+   2.2 [recursively_encrypt_decryption.py](#recursively_encrypt_decryption.py)
+
+3. [Bonus - Everything in one file](#bonus---everything-in-one-file)
 
 ## What is it and how to use it
 
@@ -331,3 +334,39 @@ This defines the loop for generating all the new encrypted viruses. These are th
 - Clear the content of the variable used in the module.
 
 - Continue the loop for a number of time equal to the specified value.
+
+## Bonus - Everything in one file
+
+As for now, in order to run `recursively_encrypt_decryption.py` (and `encrypt_decryption.py`) we need to have the virus already encrypted. However, clearly, everything can be done in one single script.
+
+Starting from the `self_replicating_virus.py`, the script `virus_recursive_encryption.py` will generate the first encrypted version of the file and then recursively encrypt the decryption functions.
+
+In order for this to work, the virus needs to be in the form like `02-encryption/self_replicating_virus.py`, and also the `02-encryption/virus_encryption.py` module is required.
+
+Run:
+
+    py virus_recursive_encryption.py
+
+and you will be prompted with:
+
+    Name of the file you want to encrypt:
+
+type the filename **without the extension**:
+
+    self_replicating_virus
+
+and then you will be asked for the level of encryption:
+
+    Number of encryption:
+
+and just put whatever you want:
+
+    10
+
+The script will generate the first encrypted version of the file as `self_replicating_virus_e0.py` and then:
+
+    self_replicating_virus_e1.py
+    self_replicating_virus_e2.py
+    .
+    .
+    .
